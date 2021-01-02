@@ -1,0 +1,4 @@
+RecipeQueue:
+  Type: AWS::SQS::Queue
+  Properties:
+    QueueName: ${self:custom.RecipeQueue.name}

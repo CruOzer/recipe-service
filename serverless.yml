@@ -33,12 +33,15 @@ provider:
   region: eu-central-1
   environment:
     RECIPES_TABLE_NAME: ${self:custom.RecipesTable.name}
+    # RECIPE_QUEUE_URL: ${self:custom.RecipeQueue.url}
   iamRoleStatements:
     - ${file(iam/RecipesTableIAM.yml):RecipesTableIAM}
+    # - ${file(iam/RecipeQueueIAM.yml):RecipeQueueIAM}
+
 resources:
   Resources:
     RecipesTable: ${file(resources/RecipesTable.yml):RecipesTable}
-
+    RecipeQueue: ${file(resources/RecipeQueue.yml):RecipeQueue}
 # you can add statements to the Lambda function's IAM Role here
 #  iamRoleStatements:
 #    - Effect: "Allow"
@@ -87,6 +90,12 @@ functions:
       - http:
           method: GET
           path: /recipe/{id}
+  infoItemCreated:
+    handler: src/handlers/infoItemCreated.handler
+    events:
+      - sqs:
+          arn: ${self:custom.RecipeQueue.arn}
+          batchSize: 1
 #  hello:
 #    handler: src/handlers/handler.hello
 #    The following are a few example events you can configure
@@ -145,3 +154,7 @@ custom:
   RecipesTable:
     name: !Ref RecipesTable
     arn: !GetAtt RecipesTable.Arn
+  RecipeQueue:
+    name: recipe-queue-${self:provider.stage}
+    arn: !GetAtt RecipeQueue.Arn
+    url: !Ref RecipeQueue

@@ -15,6 +15,9 @@ const schema = {
             ingredients: {
               type: "array",
             },
+            tags: {
+              type: "array",
+            },
           },
           required: ["instructions"],
         },

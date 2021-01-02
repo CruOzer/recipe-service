@@ -1,7 +1,7 @@
 RecipesTable:
   Type: AWS::DynamoDB::Table
   Properties:
-    TableName: Recipe-Table-${self:provider.stage}
+    TableName: recipe-table-${self:provider.stage}
     BillingMode: PAY_PER_REQUEST
     AttributeDefinitions:
       - AttributeName: id

@@ -1,7 +1,7 @@
 {
   "name": "recipe-service",
   "version": "1.0.0",
-  "description": "Serverless Recipse Service",
+  "description": "Serverless Recipe Service",
   "dependencies": {
     "@middy/core": "^1.5.0",
     "@middy/http-cors": "^1.5.0",
@@ -15,9 +15,6 @@
   "devDependencies": {
     "serverless-bundle": "^4.1.0",
     "serverless-pseudo-parameters": "^2.5.0"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Christian Kost",
   "license": "MIT"
