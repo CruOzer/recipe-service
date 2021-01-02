@@ -19,18 +19,22 @@ service: recipe-service
 plugins:
   - serverless-bundle
   - serverless-pseudo-parameters
-  
+
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
-frameworkVersion: '2'
+frameworkVersion: "2"
 
 provider:
   name: aws
   runtime: nodejs12.x
 
-# you can overwrite defaults here
+  # you can overwrite defaults here
   stage: ${opt:stage, 'dev'}
   region: eu-central-1
+
+resources:
+  Resources:
+    RecipesTable: ${file(resources/RecipesTable.yml):RecipesTable}
 
 # you can add statements to the Lambda function's IAM Role here
 #  iamRoleStatements:
@@ -115,3 +119,8 @@ functions:
 #     NewOutput:
 #       Description: "Description for the output"
 #       Value: "Some output value"
+
+custom:
+  RecipesTable:
+    name: !Ref RecipesTable
+    arn: !GetAtt RecipesTable.Arn
