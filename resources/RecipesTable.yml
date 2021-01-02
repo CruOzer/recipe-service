@@ -6,6 +6,15 @@ RecipesTable:
     AttributeDefinitions:
       - AttributeName: id
         AttributeType: S
+      - AttributeName: type
+        AttributeType: S
     KeySchema:
       - AttributeName: id
         KeyType: HASH
+    GlobalSecondaryIndexes:
+      - IndexName: typeIndex
+        KeySchema:
+          - AttributeName: type
+            KeyType: HASH
+        Projection:
+          ProjectionType: ALL

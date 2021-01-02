@@ -31,7 +31,10 @@ provider:
   # you can overwrite defaults here
   stage: ${opt:stage, 'dev'}
   region: eu-central-1
-
+  environment:
+    RECIPES_TABLE_NAME: ${self:custom.RecipesTable.name}
+  iamRoleStatements:
+    - ${file(iam/RecipesTableIAM.yml):RecipesTableIAM}
 resources:
   Resources:
     RecipesTable: ${file(resources/RecipesTable.yml):RecipesTable}
@@ -66,8 +69,26 @@ resources:
 #    - exclude-me-dir/**
 
 functions:
-  hello:
-    handler: src/handlers/handler.hello
+  createRecipe:
+    handler: src/handlers/createRecipe.handler
+    events:
+      - http:
+          method: POST
+          path: /recipe
+  getRecipes:
+    handler: src/handlers/getRecipes.handler
+    events:
+      - http:
+          method: GET
+          path: /recipes
+  getRecipe:
+    handler: src/handlers/getRecipe.handler
+    events:
+      - http:
+          method: GET
+          path: /recipe/{id}
+#  hello:
+#    handler: src/handlers/handler.hello
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details

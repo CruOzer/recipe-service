@@ -1,0 +1,10 @@
+RecipesTableIAM:
+  Effect: Allow
+  Action:
+    - dynamodb:PutItem
+    - dynamodb:GetItem
+    - dynamodb:UpdateItem
+    - dynamodb:Query
+  Resource: 
+    - ${self:custom.RecipesTable.arn}
+    - !Join ['/',['${self:custom.RecipesTable.arn}', 'index', 'typeIndex']]
