@@ -1,4 +1,4 @@
 RecipeQueue:
   Type: AWS::SQS::Queue
   Properties:
-    QueueName: ${self:custom.RecipeQueue.name}
+    QueueName: recipe-queue-${self:provider.stage}

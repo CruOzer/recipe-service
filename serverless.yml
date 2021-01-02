@@ -33,10 +33,10 @@ provider:
   region: eu-central-1
   environment:
     RECIPES_TABLE_NAME: ${self:custom.RecipesTable.name}
-    # RECIPE_QUEUE_URL: ${self:custom.RecipeQueue.url}
+    RECIPE_QUEUE_URL: ${self:custom.RecipeQueue.url}
   iamRoleStatements:
     - ${file(iam/RecipesTableIAM.yml):RecipesTableIAM}
-    # - ${file(iam/RecipeQueueIAM.yml):RecipeQueueIAM}
+    - ${file(iam/RecipeQueueIAM.yml):RecipeQueueIAM}
 
 resources:
   Resources:
@@ -155,6 +155,5 @@ custom:
     name: !Ref RecipesTable
     arn: !GetAtt RecipesTable.Arn
   RecipeQueue:
-    name: recipe-queue-${self:provider.stage}
     arn: !GetAtt RecipeQueue.Arn
     url: !Ref RecipeQueue

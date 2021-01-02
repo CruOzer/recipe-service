@@ -6,7 +6,7 @@ import { sendInfoItemCreated } from "../lib/sendInfoItemCreated";
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
-export async function creatItem(title, description, author, type, data) {
+export async function createItem(title, description, author, type, data) {
   const now = new Date();
   // validate recipe-type
   if (type !== "recipe" && type !== "category")
@@ -26,15 +26,15 @@ export async function creatItem(title, description, author, type, data) {
 
   // Write to database
   try {
-    const createDb = dynamoDb.put({
-      TableName: process.env.RECIPES_TABLE_NAME,
-      Item: item,
-    });
+    await dynamoDb
+      .put({
+        TableName: process.env.RECIPES_TABLE_NAME,
+        Item: item,
+      })
+      .promise();
 
     // Send Message
-    const sendMessage = sendInfoItemCreated(item);
-
-    Promise.all([createDb, sendMessage]);
+    await sendInfoItemCreated(item);
   } catch (error) {
     console.error(error);
     throw new createError.InternalServerError(error);
