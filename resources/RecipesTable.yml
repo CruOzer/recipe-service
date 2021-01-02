@@ -8,6 +8,8 @@ RecipesTable:
         AttributeType: S
       - AttributeName: type
         AttributeType: S
+      - AttributeName: title
+        AttributeType: S
     KeySchema:
       - AttributeName: id
         KeyType: HASH
@@ -16,5 +18,13 @@ RecipesTable:
         KeySchema:
           - AttributeName: type
             KeyType: HASH
+        Projection:
+          ProjectionType: ALL
+      - IndexName: typeAndTitleIndex
+        KeySchema:
+          - AttributeName: type
+            KeyType: HASH
+          - AttributeName: title
+            KeyType: RANGE
         Projection:
           ProjectionType: ALL

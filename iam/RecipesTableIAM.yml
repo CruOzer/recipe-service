@@ -8,3 +8,4 @@ RecipesTableIAM:
   Resource:
     - ${self:custom.RecipesTable.arn}
     - !Join ["/", ["${self:custom.RecipesTable.arn}", "index", "typeIndex"]]
+    - !Join ["/", ["${self:custom.RecipesTable.arn}", "index", "typeAndTitleIndex"]]

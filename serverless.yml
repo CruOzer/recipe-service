@@ -91,7 +91,7 @@ functions:
           method: GET
           path: /recipe/{id}
   infoItemCreated:
-    handler: src/handlers/infoItemCreated.handler
+    handler: src/handlers/processItemCreated.handler
     events:
       - sqs:
           arn: ${self:custom.RecipeQueue.arn}
