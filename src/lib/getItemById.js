@@ -8,7 +8,7 @@ export async function getItemById(id) {
   try {
     const result = await dynamodb
       .get({
-        TableName: process.env.AUCTIONS_TABLE_NAME,
+        TableName: process.env.RECIPES_TABLE_NAME,
         Key: { id },
       })
       .promise();

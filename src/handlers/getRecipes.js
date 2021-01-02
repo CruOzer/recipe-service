@@ -11,7 +11,7 @@ async function getRecipes(event, context) {
   const params = {
     TableName: process.env.RECIPES_TABLE_NAME,
     IndexName: "typeIndex",
-    KeyCondititionExpression: "type = :type",
+    KeyConditionExpression: "type = :type",
     ExpressionAttributeValues: {
       ":type": type,
     },
