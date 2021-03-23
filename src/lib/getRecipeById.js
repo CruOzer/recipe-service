@@ -3,7 +3,7 @@ import createError from "http-errors";
 
 const dynamodb = new AWS.DynamoDB.DocumentClient();
 
-export async function getItemById(id) {
+export async function getRecipeById(id) {
   let item;
   try {
     const result = await dynamodb

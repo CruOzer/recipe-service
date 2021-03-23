@@ -1,10 +1,10 @@
 import commonMiddleware from "../lib/commonMiddleware";
 
-import { getItemById } from "../lib/getItemById";
+import { getRecipeById } from "../lib/getRecipeById";
 
 async function getRecipes(event, context) {
   const { id } = event.pathParameters;
-  const recipe = await getItemById(id);
+  const recipe = await getRecipeById(id);
 
   return {
     statusCode: 200,

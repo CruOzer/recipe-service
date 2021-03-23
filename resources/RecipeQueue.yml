@@ -1,4 +1,14 @@
 RecipeQueue:
   Type: AWS::SQS::Queue
   Properties:
-    QueueName: recipe-queue-${self:provider.stage}
+    QueueName: ${self:custom.RecipeQueue.name}
+
+Outputs:
+  RecipeQueueArn:
+    Value: ${self:custom.RecipeQueue.arn}
+    Export:
+      Name: ${self:custom.RecipeQueue.name}-Arn
+  RecipeQueueUrl:
+    Value: ${self:custom.RecipeQueue.url}
+    Export:
+      Name: ${self:custom.RecipeQueue.name}-Url

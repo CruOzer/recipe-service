@@ -2,5 +2,4 @@ RecipeQueueIAM:
   Effect: Allow
   Action:
     - sqs:SendMessage
-    - sqs:ReceiveMessage
   Resource: ${self:custom.RecipeQueue.arn}

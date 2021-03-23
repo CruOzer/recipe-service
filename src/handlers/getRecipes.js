@@ -5,23 +5,12 @@ const dynamodb = new AWS.DynamoDB.DocumentClient();
 
 async function getRecipes(event, context) {
   let recipes;
-
-  const type = "recipe";
-
   const params = {
     TableName: process.env.RECIPES_TABLE_NAME,
-    IndexName: "typeIndex",
-    KeyConditionExpression: "#type = :type",
-    ExpressionAttributeValues: {
-      ":type": type,
-    },
-    ExpressionAttributeNames: {
-      "#type": "type",
-    },
   };
 
   try {
-    const result = await dynamodb.query(params).promise();
+    const result = await dynamodb.scan(params);
     recipes = result.Items;
   } catch (error) {
     console.error(error);

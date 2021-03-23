@@ -1,12 +1,10 @@
 RecipesTable:
   Type: AWS::DynamoDB::Table
   Properties:
-    TableName: recipe-table-${self:provider.stage}
+    TableName: recipes-table-${self:provider.stage}
     BillingMode: PAY_PER_REQUEST
     AttributeDefinitions:
       - AttributeName: id
-        AttributeType: S
-      - AttributeName: type
         AttributeType: S
       - AttributeName: title
         AttributeType: S
@@ -14,17 +12,9 @@ RecipesTable:
       - AttributeName: id
         KeyType: HASH
     GlobalSecondaryIndexes:
-      - IndexName: typeIndex
+      - IndexName: titleIndex
         KeySchema:
-          - AttributeName: type
-            KeyType: HASH
-        Projection:
-          ProjectionType: ALL
-      - IndexName: typeAndTitleIndex
-        KeySchema:
-          - AttributeName: type
-            KeyType: HASH
           - AttributeName: title
-            KeyType: RANGE
+            KeyType: HASH
         Projection:
           ProjectionType: ALL
