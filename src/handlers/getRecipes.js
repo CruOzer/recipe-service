@@ -10,7 +10,7 @@ async function getRecipes(event, context) {
   };
 
   try {
-    const result = await dynamodb.scan(params);
+    const result = await dynamodb.scan(params).promise();
     recipes = result.Items;
   } catch (error) {
     console.error(error);

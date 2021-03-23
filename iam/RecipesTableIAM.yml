@@ -5,6 +5,7 @@ RecipesTableIAM:
     - dynamodb:GetItem
     - dynamodb:UpdateItem
     - dynamodb:Query
+    - dynamodb:Scan
   Resource:
     - ${self:custom.RecipesTable.arn}
     - !Join ["/", ["${self:custom.RecipesTable.arn}", "index", "titleIndex"]]
